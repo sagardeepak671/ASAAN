@@ -22,7 +22,7 @@ const watchers = [];
 
 // Website builds always use the connected API on their own origin. Native
 // pilot/offline flags from an Android build must not leak into the website.
-const webEnv = { ...process.env, CI: "1" };
+const webEnv = { ...process.env, CI: "1", EXPO_NO_TELEMETRY: "1" };
 for (const key of ["EXPO_PUBLIC_HANDYHIVE_API_URL", "EXPO_PUBLIC_HANDYHIVE_PILOT", "EXPO_PUBLIC_HANDYHIVE_OFFLINE_DEMO", "HANDYHIVE_BUILD_CHANNEL", "EAS_BUILD_PROFILE"]) {
   delete webEnv[key];
 }

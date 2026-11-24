@@ -1,22 +1,48 @@
-# HandyHive website and app
+# ASAAN (HandyHive)
 
-The website and Android/iOS app use the same Expo and React Native screens in `mobile/`. Make and review changes in the browser first; those source changes are included the next time you build the native app.
+> **On-Demand Home Services Platform** — Connect with trusted local professionals for plumbing, electrical, cleaning, and painting services.
 
-## Open HandyHive on your phone
+[![Deploy ASAAN to GitHub Pages](https://github.com/sagardeepak671/ASAAN/actions/workflows/pages.yml/badge.svg)](https://github.com/sagardeepak671/ASAAN/actions/workflows/pages.yml)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-brightgreen)](https://sagardeepak671.github.io/ASAAN/)
 
-### Connect production hosting
+## 🚀 Live Demo — Run Anywhere from Your Browser
 
-[Deploy HandyHive to Render](https://render.com/deploy?repo=https://github.com/Aditya-Yadav1/ddr_website). Review the paid Starter service and its 1 GB persistent disk before approving. Enter your Twilio API key SID, API secret and Verify service SID in the three secret fields. The Docker build serves the website and API at one HTTPS origin. SQLite stores accounts and bookings in the attached disk.
+You can run and test ASAAN directly on your phone, tablet, or desktop browser with zero installation:
 
-After deployment, open the Render URL on your phone. Choose **Customer** or **Worker** and sign in by SMS. Workers must complete the existing verification process and publish their service PINs before customers can book them. See the [operator guide](SECURITY_AND_LAUNCH.md). To check a deployment, set `EXPO_PUBLIC_HANDYHIVE_API_URL` to its HTTPS origin followed by `/api/v1` and run `node scripts/check-api.js`.
+🔗 **[https://sagardeepak671.github.io/ASAAN/](https://sagardeepak671.github.io/ASAAN/)**
 
-### GitHub Pages browser demo
+- **Customer Experience:** Browse verified local service providers by PIN code (e.g. `110075`), request visits, simulate quotes, and test checkout.
+- **Worker Experience:** Sign in to view and accept incoming jobs, share live arrival estimates, manage service areas, and acknowledge payments.
+- **Offline & Cross-Platform:** Powered by Expo and React Native Web with an interactive client-side demo state that runs entirely in the browser.
 
-The [Pages deployment workflow](.github/workflows/pages.yml) publishes the browser demo. In the GitHub repository, set **Settings → Pages → Source** to **GitHub Actions**, then run **Publish HandyHive browser demo** from **Actions**. Later pushes to `main` that change the app will publish automatically. Open the deployment URL from the workflow run on your phone.
+---
 
-Choose **Customer**, sign in to the preview, and select a locality or PIN. Bookings contains the sample visit. Use the HandyHive home link to choose **Worker** and see the visit from the other side. The preview stores fictional activity in the current browser.
+## 🌐 Deploy to GitHub Pages (Automated via GitHub Actions)
 
-### Connected preview on the same Wi-Fi
+This repository includes a pre-configured GitHub Actions workflow in [`.github/workflows/pages.yml`](.github/workflows/pages.yml) that builds and deploys the web app automatically.
+
+### One-Time Setup in Your GitHub Repository:
+1. Go to your repository on GitHub: **[https://github.com/sagardeepak671/ASAAN](https://github.com/sagardeepak671/ASAAN)**
+2. Click **Settings** (top tab).
+3. On the left sidebar, click **Pages** (under *Code and automation*).
+4. Under **Build and deployment** → **Source**, select **GitHub Actions**.
+5. Every push to the `main` branch will automatically trigger the build and deploy pipeline.
+6. Your live link will always be: **`https://sagardeepak671.github.io/ASAAN/`**
+
+To trigger a manual deployment at any time:
+- Go to the **Actions** tab on GitHub → select **Deploy ASAAN to GitHub Pages** → click **Run workflow**.
+
+---
+
+## 📱 Open on Your Phone (Local or Hosted)
+
+### Production Hosting (Full Stack with API & Database)
+
+[Deploy ASAAN to Render](https://render.com/deploy?repo=https://github.com/sagardeepak671/ASAAN). Review the Starter service and persistent disk before approving. Enter your Twilio API key SID, API secret, and Verify service SID in the secret fields. The Docker build serves the website and API at one HTTPS origin. SQLite stores accounts and bookings in the attached disk.
+
+After deployment, open the Render URL on your phone. Choose **Customer** or **Worker** and sign in by SMS. Workers must complete the verification process and publish their service PINs before customers can book them. See the [operator guide](SECURITY_AND_LAUNCH.md). To check a deployment, set `EXPO_PUBLIC_HANDYHIVE_API_URL` to its HTTPS origin followed by `/api/v1` and run `node scripts/check-api.js`.
+
+### Connected Preview on the Same Wi-Fi
 
 1. Connect your computer and phone to the same Wi-Fi. On Windows, double-click `START_HANDYHIVE_WEB.cmd`. You can also run `npm run start:phone` or `node scripts/start-web.js --phone` from the project folder. The first setup requires Node.js 24 and `npm --prefix mobile ci`.
 2. Wait for **HandyHive connected preview**. Open the printed `http://` address on your phone and keep the server running. You can use your browser’s **Add to Home Screen** option to open HandyHive again from a shortcut.
@@ -24,7 +50,9 @@ Choose **Customer**, sign in to the preview, and select a locality or PIN. Booki
 
 If there are multiple network adapters, set `HANDYHIVE_HOST` to the computer’s IPv4 address on the phone’s network and run the launcher again. If the phone can’t load the page, check that the address is current and try a private Wi-Fi network or a hotspot that allows connected devices to reach each other. Use locality search or enter a PIN code for this HTTP preview. A permanent HTTPS setup is described in [SECURITY_AND_LAUNCH.md](SECURITY_AND_LAUNCH.md#permanent-hosting).
 
-## Develop in the browser
+---
+
+## 💻 Develop in the Browser
 
 Use Node.js 24. From this project folder:
 
@@ -48,13 +76,15 @@ Explore shows matching workers after the PIN is selected. Open a worker profile 
 
 To try the worker workspace separately, sign in as `worker-demo`, `electric-demo`, `cleaning-demo`, or `painting-demo` with `HandyHive-local-demo`. The phone pilot also provides these workers. Set `HANDYHIVE_DEMO_WORKERS=0` before starting a local server when you need a directory with only your own profiles.
 
-## Build or run
+---
+
+## 🛠️ Build or Run
 
 ```powershell
-npm run build:web  # Create mobile/dist without starting a server
-npm start          # Build the website and run it with the API
-npm run typecheck
-npm test
+npm run build:pages  # Export static web demo for GitHub Pages (dist-pages/)
+npm run build:web    # Create mobile/dist without starting a server
+npm start            # Build the website and run it with the API
+npm run typecheck    # Run TypeScript check
 ```
 
 `node server.js` serves the last website build by default. Docker builds the same shared website. The original HTML/JavaScript prototype is retained for reference; set `HANDYHIVE_APP_PREVIEW=0` only if you need to run it. Opening the old root `index.html` directly does not show the shared app.
@@ -67,11 +97,15 @@ Review [LAUNCH_CHECKLIST.md](LAUNCH_CHECKLIST.md) before deployment. The public 
 
 Operations access and the account deletion request queue are described in [ADMIN_SETUP.md](ADMIN_SETUP.md).
 
-## Google sign-in
+---
+
+## 🔑 Google Sign-In
 
 The connected website supports Google sign-in through an ASAAN-specific Firebase project when its public web config is configured. A server Admin credential enables additional token revocation checks. See [FIREBASE_SETUP.md](FIREBASE_SETUP.md). Phone sign-in remains available; the GitHub Pages build remains an offline demo. Google identity is linked to an existing phone account only through an explicit action while signed in to that account.
 
-## Payments and provider safety
+---
+
+## 💳 Payments and Provider Safety
 
 - Open a completed booking with an outstanding final bill to try checkout. The local preview simulates the payment and labels the receipt as a test. For Razorpay staging, set `HANDYHIVE_PUBLIC_ORIGIN` to the staging HTTPS URL and configure `RAZORPAY_KEY_ID` (test key), `RAZORPAY_KEY_SECRET`, and `RAZORPAY_WEBHOOK_SECRET` on the API server. Subscribe to `payment_link.paid`, `payment_link.expired`, and `payment_link.cancelled` at `/api/payments/razorpay-webhook`. Live collection requires merchant approval, worker settlements, and refund handling. Direct cash and UPI receipts remain available.
 - Customers can open payment from a completed booking and leave a rating once the full bill is confirmed. Provider profiles and bookings offer a Report menu. Account shows private report status and lets customers unblock providers.
