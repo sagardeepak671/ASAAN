@@ -121,6 +121,7 @@ async function main() {
     // Pages serves 404.html for a direct visit to an Expo Router route.
     const output = path.join(mobile, "dist-pages");
     fs.copyFileSync(path.join(output, "index.html"), path.join(output, "404.html"));
+    fs.writeFileSync(path.join(output, ".nojekyll"), "");
   }
   if (stopping || buildOnly) { stop(); return; }
   server = spawn(process.execPath, [path.join(repo, "server.js")], {
